@@ -1,0 +1,383 @@
+%% This is file `elsarticle-template-1-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+%%
+\documentclass[final,12pt,a4paper]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% The graphicx package provides the includegraphics command.
+\usepackage{graphicx}
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{sourcecodepro}
+\usepackage{url}
+\usepackage{listings}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{multirow}
+\usepackage{textcomp}
+\usepackage{caption}
+
+\definecolor{Accent}{HTML}{157FFF}
+
+\lstdefinestyle{customMtheme}{%
+  backgroundcolor={},
+  basicstyle=\ttfamily\scriptsize,
+  breakatwhitespace=true,
+  breaklines=true,
+  captionpos=n,
+  commentstyle=\color{orange},
+  escapeinside={\%*}{*)},
+  extendedchars=true,
+  frame=n,
+  keywordstyle=\color{Accent},
+  language=C++,
+  rulecolor=\color{black},
+  showspaces=false,
+  showstringspaces=false,
+  xleftmargin=.5cm,
+  xrightmargin=.5cm,
+  showtabs=false,
+  stepnumber=2,
+  stringstyle=\color{gray},
+  tabsize=4,
+  keywords={void, int, float, main,
+  if, else, malloc, NULL,
+  fprintf, stderr, for, make, gcc, o, Enter, Ctrl},
+  otherkeywords={\#pragma, \#include, \&, \*, +, -, /, [, ], >, <, \$, \., std\=c11}
+}
+\lstset{basicstyle=\ttfamily\scriptsize,style=customMtheme}
+
+\renewcommand*{\UrlFont}{\ttfamily\scriptsize\relax}
+
+\graphicspath{{./img/}}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+%% Removing lines when no abstract is given
+\makeatletter
+\renewcommand{\MaketitleBox}{%
+    \resetTitleCounters
+        \def\baselinestretch{1}%
+        \begin{center}
+    \def\baselinestretch{1}%
+        \Large \@title \par
+        \vskip 18pt
+        \normalsize\elsauthors \par
+        \vskip 10pt
+        \footnotesize \itshape \elsaddress \par
+        \end{center}
+    \vskip 12pt
+}
+\makeatother
+
+%% Removing custom footer on fist page
+\makeatletter
+\def\ps@pprintTitle{%
+    \let\@oddhead\@empty
+        \let\@evenhead\@empty
+        \def\@oddfoot{\centerline{\thepage}%
+        }%
+    \let\@evenfoot\@oddfoot
+}%
+\makeatother
+
+\journal{MAC 5742-0219 Introdução à Programação Concorrente, Paralela e Distribuída}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%% Title, authors and addresses
+
+\title{EP2: Criptografia em GPUs usando CUDA}
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for the associated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for the associated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for the associated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \address{Address\fnref{label3}}
+%% \fntext[label3]{}
+
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+\author{Pedro Bruel e Alfredo Goldman}
+
+\address{MAC 5742-0219 Introdução à Programação Concorrente, Paralela e Distribuída}
+
+%%\begin{abstract}
+%% Text of abstract
+%% Suspendisse potenti. Suspendisse quis sem elit, et mattis nisl. Phasellus
+%% consequat erat eu velit rhoncus non pharetra neque auctor. Phasellus eu lacus
+%% quam. Ut ipsum dolor, euismod aliquam congue sed, lobortis et orci. Mauris eget
+%% velit id arcu ultricies auctor in eget dolor. Pellentesque suscipit adipiscing
+%% sem, imperdiet laoreet dolor elementum ut. Mauris condimentum est sed velit
+%% lacinia placerat. Vestibulum ante ipsum primis in faucibus orci luctus et
+%% ultrices posuere cubilia Curae; Nullam diam metus, pharetra vitae euismod sed,
+%% placerat ultrices eros. Aliquam tincidunt dapibus venenatis. In interdum tellus
+%% nec justo accumsan aliquam. Nulla sit amet massa augue.
+%% \end{abstract}
+%%
+%% \begin{keyword}
+%% Science \sep Publication \sep Complicated
+%% keywords here, in the form: keyword \sep keyword
+
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+%% \end{keyword}
+
+\end{frontmatter}
+
+%%
+%% Start line numbering here if you want
+%%
+%% \linenumbers
+
+%% main text
+\section{Introdução}
+
+Neste EP vocês implementarão versões para GPU, usando CUDA, de alguns
+algoritmos simples de encriptação e geração de \textit{hashes} de arquivos.
+Forneceremos implementações em \texttt{C} dos algoritmos, e cada grupo
+deverá implementar no mínimo 3 algoritmos usando CUDA.
+
+O código na linguagem \texttt{C} e os arquivos em \LaTeX{} necessários para
+gerar este documento estão disponíveis no
+\textit{GitHub}\footnote{\url{https://github.com/phrb/MAC5742-0219-EP2}
+[Acessado em 11/05/2017]}. O resto deste documento descreve as tarefas que você
+e seu grupo deverão realizar no EP2.
+
+\section{Tarefas}
+
+Vocês devem implementar em CUDA no mínimo 3 dos algoritmos de encriptação ou
+\textit{hash} disponibilizados no repositório do EP.
+Vocês podem usar 3 algoritmos de encriptação ou \textit{hash} de outras fontes,
+\textbf{desde que entreguem também o código sequencial do algoritmo}.
+
+Depois, devem realizar experimentos comparando o desempenho das versões
+sequenciais e em CUDA, usando os arquivos de teste disponibilizados no
+repositório, ou arquivos escolhidos por vocês. Caso usem arquivos diferentes
+dos disponibilizados, incluam \textit{links} no relatório para lugares onde os
+arquivos estão hospedados.
+
+O arquivo \texttt{src/crypto-algorithms/des\_test.c} contém uma função
+para ler e escrever um arquivo como um \textit{stream} de bytes. Vocês
+podem usar essa função para encriptar arquivos ou escrever a sua própria.
+Vocês devem escrever \textbf{funções de teste} que comparem os arquivos antes
+da encriptação com os arquivos após uma encriptação e decriptação,
+ou com o \textit{hash} do arquivo.
+
+Vocês devem entregar um relatório contento gráficos e análises de desempenho
+dos seus programas e das versões sequenciais. Vocês devem justificar, usando
+dados e gráficos, as escolhas para tamanho de \textit{block} e \textit{grid}
+dos seus programas em CUDA.
+
+\subsection{Apresentação dos Resultados}
+
+Depois de realizar os experimentos vocês deverão elaborar gráficos que
+evidenciem o comportamento dos três algoritmos com relação à variação do
+tamanho do arquivo processado. Os gráficos deverão ser claros e legíveis, com
+eixos nomeados. Deverão apresentar a média e o desvio padrão de $10$ execuções
+de cada programa em cada arquivo.
+
+Recomendamos que vocês usem ferramentas como a biblioteca \texttt{matplotlib}
+da linguagem \texttt{Python}. Se fizerem isso vocês conseguirão automatizar a
+realização dos experimentos e a geração dos gráficos. A automatização dos
+experimentos e da visualização dos dados gerados é fundamental para pesquisa em
+Ciência da Computação, pois permite gerar e analisar grandes conjuntos de dados
+sem muito esforço manual.
+
+\subsection{Discussão dos Resultados}
+
+Vocês deverão analisar os resultados obtidos e tentar responder a algumas
+perguntas, para cada um dos 3 algoritmos:
+
+\begin{itemize}
+    \item Como o tempo de execução varia conforme o tamanho do arquivo?
+    \item Como e por quais razões vocês escolheram o tamanho de \textit{block}
+        e \textit{grid}?
+    \item Qual o impacto das operações de I/O e alocação de memória no tempo de
+    execução?
+\end{itemize}
+
+Vocês conseguem pensar em mais perguntas interessantes?
+
+\subsection{Entrega no PACA}
+
+Vocês deverão entregar no PACA \textbf{apenas um relatório e código fonte por
+grupo}. A entrega deve ser um único arquivo nos formatos \texttt{.tar},
+\texttt{.zip}, ou qualquer formato que o \texttt{tar} consiga descompactar.
+A entrega deve ser feita \textbf{até dia 01/06/17}, e deve conter o código
+em CUDA, código sequencial de algoritmos extras que vocês utilizarem, \texttt{makefiles},
+código de testes e um relatório no formato \texttt{pdf}.
+
+\section{Tecnologias}
+
+Esta seção descreve brevemente algumas tecnologias usadas no EP2.  O monitor
+estará disponível na \textbf{Sala 120} para tirar dúvidas do EP2,
+envie um e-mail para \texttt{pedro.bruel@gmail.com} para
+marcar um horário.
+
+\subsection{Acesso a GPUs da NVIDIA}
+
+Vocês podem usar quaisquer GPUs da NVIDIA a que tenham acesso, mas também
+podemos fornecer acesso às GPUs do nosso laboratório no CCSL para todos que
+precisarem. Teremos que gerenciar os conflitos de uso, pois só um grupo poderá
+usar uma dada GPU por vez. Cadastrem seus grupos usando o questionário no PACA
+e forneçam um e-mail para contato.
+
+\subsection{Shell scripting \& GNU \texttt{screen}}
+
+Para deixar os experimentos rodando na sua máquina, faça o seguinte:
+
+\begin{lstlisting}
+$ screen
+$ ./my_experiments.sh
+<Ctrl+A><D>
+\end{lstlisting}
+
+O comando \texttt{screen} lança uma seção da qual você pode se desconectar sem
+parar a execução de um comando. A sequência \texttt{<Ctrl+A>} seguida de
+\texttt{<D>} desconectará você da sessão. Para voltar, basta executar:
+
+\begin{lstlisting}
+$ screen -r
+\end{lstlisting}
+%$
+
+\subsection{\LaTeX}
+
+Instalem o \LaTeX{} na máquina que vão usar para escrever o relatório e usem o
+arquivo \texttt{enunciado\_ep2.tex} e o \texttt{Makefile} no repositório do EP2
+como modelo.
+
+\section{Critério de Avaliação}
+
+A nota do EP2 vai de \textbf{0.0} a \textbf{10.0}, e a avaliação será feita da
+maneira descrita a seguir, se os alunos concordarem.
+
+\begin{itemize}
+    \item Implementação: \textbf{6.0}
+    \begin{itemize}
+        \item Código compila sem erros e \textit{warnings}: \textbf{2.7}
+        \item Código executa sem erros e produz o resultado correto: \textbf{2.7}
+        \item Boas práticas de programação e clareza do código: \textbf{0.6}
+    \end{itemize}
+    \item Relatório: \textbf{4.0}
+    \begin{itemize}
+        \item Apresentação e Análise dos Experimentos: \textbf{3.4}
+        \item Clareza do texto e figuras: \textbf{0.6}
+    \end{itemize}
+\end{itemize}
+
+O monitor estará disponível na \textbf{Sala 120} para tirar dúvidas do EP2,
+envie um e-mail para \texttt{pedro.bruel@gmail.com} para marcar um horário.
+Bom EP!
+
+%% References
+%%
+%% Following citation commands can be used in the body text:
+%% Usage of \cite is as follows:
+%%   \cite{key}          ==>>  [#]
+%%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
+%%   \citet{key}         ==>>  Author [#]
+
+%% References with bibTeX database:
+
+%% \bibliographystyle{model1-num-names}
+%% \bibliography{sample.bib}
+
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use model1-num-names.bst.
+
+%% References without bibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1-num.tex'.
